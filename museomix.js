@@ -4,7 +4,9 @@ let winC = document.getElementById('winC');
 let looseC = document.getElementById('looseC');
 let introV = document.getElementById('introV');
 let playV= document.getElementById('playV');
+playV.removeAttribute('loop');
 let winV = document.getElementById('winV');
+winV.removeAttribute('loop')
 let D1 = document.getElementById('D1');
 let D2 = document.getElementById('D2');
 let D3 = document.getElementById('D3');
@@ -16,6 +18,18 @@ let D8 = document.getElementById('D8');
 let D9 = document.getElementById('D9');
 let D10 = document.getElementById('D10');
 let digits = [D1,D2,D3,D4,D5,D6,D7,D8,D9,D10]
+
+let Dl1 = document.getElementById('Dl1');
+let Dl2 = document.getElementById('Dl2');
+let Dl3 = document.getElementById('Dl3');
+let Dl4 = document.getElementById('Dl4');
+let Dl5 = document.getElementById('Dl5');
+let Dl6 = document.getElementById('Dl6');
+let Dl7 = document.getElementById('Dl7');
+let Dl8 = document.getElementById('Dl8');
+let Dl9 = document.getElementById('Dl9');
+let Dl10 = document.getElementById('Dl10');
+let digitsl = [Dl1,Dl2,Dl3,Dl4,Dl5,Dl6,Dl7,Dl8,Dl9,Dl10]
 
 const imgFolder = "img/"
 const videoFolder = "video/"
@@ -87,6 +101,14 @@ let reset = () => {
 
     winV.pause();
     winV.currentTime = 0;
+
+    digitsl.forEach((dl, index) => {
+        if(code[index] == soluce[index]){
+            digitsl[index].src = imgFolder+code[index]+'ok.png'
+        }else{
+            digitsl[index].src = imgFolder+code[index]+'nok.png'
+        }
+    })
 }
 
 /**
@@ -104,7 +126,7 @@ let nextMoove = (input) => {
         playV.currentTime = 0;
         playV.src = videoFolder+"V"+step+".mp4";
         playV.play();
-        
+
         step += 1;
     }else{
 
@@ -157,3 +179,9 @@ document.addEventListener("keypress", function(event) {
         play(event)
     }
 });
+
+playV.addEventListener("ended", () => {
+    if(step == 6){
+        play(null)
+    }
+})
